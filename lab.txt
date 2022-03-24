@@ -1,0 +1,90 @@
+a= input("write 1 number ")
+b=input("write 2 number ")
+op= input("Write operator ")
+if op=="/":
+        try:
+            print(int(a)/int(b))
+        except ValueError:
+            print( " There is a mistake in numbers ")
+        except ZeroDivisionError:
+            print("You can't divide on zero")
+elif op=="+":
+        try:
+            print(int(a)+int(b))
+        except ValueError:
+            print( " There is a mistake in numbers ")
+elif op=="-":
+        try:
+            print(int(a)-int(b))
+        except ValueError:
+            print( " There is a mistake in numbers ")
+
+
+
+
+import statistics
+import requests
+import matplotlib.pyplot as plt
+
+file=requests.get('https://raw.githubusercontent.com/dm-fedorov/python3_intro/master/lesson_10/temper.stat')
+file=file.text
+file=file.split("\n")
+file.remove("")
+file=[float(i) for i in file]
+print(max(file), min(file), statistics.mean(file))
+unique=[];
+non=[];
+for i in file:
+    if i in unique:
+        unique.remove(i)
+        non.append(i)
+    elif not i in non:
+        unique.append(i)
+print(len(unique))
+x=[]
+while i!=len(file):
+    x.append(i)
+    i+=1
+
+plt.plot(x, file)
+plt.show()
+
+
+
+import requests
+file=requests.get('https://raw.githubusercontent.com/dm-fedorov/python3_intro/master/lesson_10/moby.txt')
+file=file.text
+s=str.maketrans({'.':None, ',':None, ';':None, '-':" "})
+file=file.translate(s)
+file=file.lower()
+print(file)
+f=file.replace("\n"," " )
+f=f.replace("  ", " ")
+
+f=f.split(' ')
+f.remove('')
+print(f)
+d={i:f.count(i) for i in f}
+print(d)
+new=open("moby_clean.txt ", "a+")
+for i in f:
+    new.write(i)
+
+
+
+
+
+import requests
+import random
+file=requests.get('https://raw.githubusercontent.com/dm-fedorov/python_basic/master/data/responses.txt')
+file=file.text
+file=file.split("\n")
+print("If you want to end session, write stop ")
+i=0
+while i==0:
+    print("Ask your question ")
+    s=input()
+    if s=="stop":
+        print("Good luck!")
+        break
+    print(random.choice(file))
